@@ -12,7 +12,25 @@ class Book extends Model
     use HasFactory;
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function customer()
+    protected $dates = [
+        'time_from',
+        'time_to',
+    ];
+
+    // protected $dateFormat = 'Y-m-d H:i:s';
+
+    public $fillable = [
+        'nama_pemesan',
+        'email',
+        'phone',
+        'nama_tamu',
+        'data_id',
+        'time_from',
+        'time_to',
+        'jum_kamar',
+    ];
+
+    public function data()
     {
         return $this->belongsTo(Data::class);
     }
@@ -21,14 +39,14 @@ class Book extends Model
      * Set attribute to date format
      * @param $input
      */
-    public function setTimeFromAttribute($input)
-    {
-        if ($input != null && $input != '') {
-            $this->attributes['time_from'] = Carbon::createFromFormat('Y-m-d H:i', $input)->format('Y-m-d H:i');
-        } else {
-            $this->attributes['time_from'] = null;
-        }
-    }
+    // public function setTimeFromAttribute($input)
+    // {
+    //     if ($input != null && $input != '') {
+    //         $this->attributes['time_from'] = Carbon::createFromFormat('Y-m-d H:i', $input)->format('Y-m-d H:i');
+    //     } else {
+    //         $this->attributes['time_from'] = null;
+    //     }
+    // }
 
     /**
      * Get attribute from date format
@@ -36,29 +54,38 @@ class Book extends Model
      *
      * @return string
      */
-    public function getTimeFromAttribute($input)
+    public function getTimeFromAttribute($value)
     {
-        $zeroDate = str_replace(['Y', 'm', 'd'], ['0000', '00', '00'],'Y-m-d H:i:s');
-
-        if ($input != $zeroDate && $input != null) {
-            return Carbon::createFromFormat('Y-m-d H:i:s', $input)->format('Y-m-d H:i:s');
-        } else {
-            return '';
-        }
+        return Carbon::parse($value)->format('d-m-y');
     }
+
+    public function getTimeToAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-y');
+    }
+    // public function getTimeFromAttribute($input)
+    // {
+    //     $zeroDate = str_replace(['Y', 'm', 'd'], ['0000', '00', '00'],'Y-m-d H:i:s');
+
+    //     if ($input != $zeroDate && $input != null) {
+    //         return Carbon::createFromFormat('Y-m-d H:i:s', $input)->format('Y-m-d H:i:s');
+    //     } else {
+    //         return '';
+    //     }
+    // }
 
     /**
      * Set attribute to date format
      * @param $input
      */
-    public function setTimeToAttribute($input)
-    {
-        if ($input != null && $input != '') {
-            $this->attributes['time_to'] = Carbon::createFromFormat('Y-m-d H:i', $input)->format('Y-m-d H:i');
-        } else {
-            $this->attributes['time_to'] = null;
-        }
-    }
+    // public function setTimeToAttribute($input)
+    // {
+    //     if ($input != null && $input != '') {
+    //         $this->attributes['time_to'] = Carbon::createFromFormat('Y-m-d H:i', $input)->format('Y-m-d H:i');
+    //     } else {
+    //         $this->attributes['time_to'] = null;
+    //     }
+    // }
 
     /**
      * Get attribute from date format
@@ -66,22 +93,22 @@ class Book extends Model
      *
      * @return string
      */
-    public function getTimeToAttribute($input)
-    {
-        $zeroDate = str_replace(['Y', 'm', 'd'], ['0000', '00', '00'],'Y-m-d H:i');
+    // public function getTimeToAttribute($input)
+    // {
+    //     $zeroDate = str_replace(['Y', 'm', 'd'], ['0000', '00', '00'],'Y-m-d H:i');
 
-        if ($input != $zeroDate && $input != null) {
-            return Carbon::createFromFormat('Y-m-d H:i:s', $input)->format('Y-m-d H:i:s');
-        } else {
-            return '';
-        }
-    }
+    //     if ($input != $zeroDate && $input != null) {
+    //         return Carbon::createFromFormat('Y-m-d H:i:s', $input)->format('Y-m-d H:i:s');
+    //     } else {
+    //         return '';
+    //     }
+    // }
 
     public function getStatusAttribute($input) {
         return [
             0 => 'Created',
             1 => 'Completed',
-            2 => 'Cancelled'
+            2 => 'Cancelled',
         ][$input];
     }
 }

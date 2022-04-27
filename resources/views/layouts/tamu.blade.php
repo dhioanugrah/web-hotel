@@ -22,28 +22,42 @@
     @include('layouts.inc_tamu.navbar')
 
     <div class="container-fluid p-0">
-        <img src="images/banner.jpg" class="img img-fluid w-100">
+        <img src="images/bg.jpg" class="img img-fluid w-100">
     </div>
     <!-- <div class="container content">
         @yield('content')
     </div> -->
-    
+    <form method="get" action="{{route('pesan.create')}}"
+        class=" bg-white py-2 px-1 form-pesan border shadow text-center">
+        <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-block btn-secondary">Pesan</button>
+        </div>
+    </form>
+
 
     <div class="container  mt-2" id="panel_tentang_kami">
-  <div class="d-flex justify-content-center">
-    <div class="row">
-     <div class="col-sm-12 p-5">
-      <h2 class="text-center">TENTANG KAMI</h2>
-      <p> <b>Hotel Anaya</b> terkenal dengan keramahan kelas dunia, desain hotel yang mengagumkan dan standar layanan yang tak tertandingi di Bali dan Jakarta, AYANA adalah resort bintang lima yang pertama di Pantai Waecicu, Pulau Flores, hanya dengan satu jam penerbangan dari Pulau Bali yang sangat indah.
-        AYANA Komodo Resort, Waecicu Beach memiliki 13 suites dan 192 kamar tamu yang premium. Terinspirasi dengan cahaya, kenyamanan dan ruang terbuka, setiap kamar yang kontemporer menawarkan pemandangan laut yang menawan dengan jendela besar untuk menikmati cahaya keemasan dari matahari yang terbenam di belakang Pulau Kukusan.
-        
-        Berlokasi di salah satu pulau berbukit dan indah dari kepulauan Indonesia, terdapat beragam agama, bahasa dan pemandangan yang luar biasa yang berpadu dengan laut berwarna biru kristal dan pantai dengan pasir putih yang asli.
-    </p>
-   </div>
-  </div>
- </div>
-</div>
-@yield('modal')
+        <div class="d-flex justify-content-center">
+            <div class="row">
+                <div class="col-sm-12 p-5">
+                    <h2 class="text-center">TENTANG KAMI</h2>
+                    <p> <b>Hotel Anaya</b> terkenal dengan keramahan kelas dunia, desain hotel yang mengagumkan dan
+                        standar layanan yang tak tertandingi di Bali dan Jakarta, AYANA adalah resort bintang lima yang
+                        pertama di Pantai Waecicu, Pulau Flores, hanya dengan satu jam penerbangan dari Pulau Bali yang
+                        sangat indah.
+                        AYANA Komodo Resort, Waecicu Beach memiliki 13 suites dan 192 kamar tamu yang premium.
+                        Terinspirasi dengan cahaya, kenyamanan dan ruang terbuka, setiap kamar yang kontemporer
+                        menawarkan pemandangan laut yang menawan dengan jendela besar untuk menikmati cahaya keemasan
+                        dari matahari yang terbenam di belakang Pulau Kukusan.
+
+                        Berlokasi di salah satu pulau berbukit dan indah dari kepulauan Indonesia, terdapat beragam
+                        agama, bahasa dan pemandangan yang luar biasa yang berpadu dengan laut berwarna biru kristal dan
+                        pantai dengan pasir putih yang asli.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @yield('modal')
 
     <footer class="footer">
         <div class="container">

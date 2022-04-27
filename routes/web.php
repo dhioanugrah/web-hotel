@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PesanController;
 use App\Http\Controllers\LoginAdminController;
 
 /*
@@ -15,14 +16,23 @@ use App\Http\Controllers\LoginAdminController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+    return view('layouts.tamu');
+});
 
-Route::view('kamar', 'kamar')->name('kamar');
+Route::get('/kamar', function () {
+    return view('layouts.kamar');
+});
+
+Route::resource('pesan','PesanController');
+Route::get('laporan','PesanController@cetakForm')->name('laporan');
+Route::get('cetak/{nama_pemesan}/{email}','PesanController@cetakLaporan')->name('cetak');
+
 
 Route::group([
     'prefix'=>config('admin.path'),
 ], function(){
+
+
 
     Route::get('login','LoginAdminController@formLogin')->name('admin.login');
     Route::post('login','LoginAdminController@login');

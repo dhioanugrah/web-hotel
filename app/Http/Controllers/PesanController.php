@@ -5,28 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Data;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
 
-class BookController extends Controller
+class PesanController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request['search'] ?? "";
-        if($search !=""){
-            $book = Book::where('nama_pemesan','LIKE', "%$search%")->orWhere('time_from','LIKE', "%$search%")->get();
-        }else{
-            $book = Book::all();
-        }
-        // $data = Data::get()->pluck('nama_kamar', 'id');
-   
-        return view('book.index', compact('book'));
+        $data = Data::all();
+        $book = Book::all();
+        return view('pesan.index', compact('book','data'));
     }
 
     /**
@@ -36,9 +32,9 @@ class BookController extends Controller
      */
     public function create(Request $request)
     {
-
         $data = Data::get()->pluck('nama_kamar', 'id');
-
+        
+        $data = Data::get()->pluck('nama_kamar', 'id');
         $nama_pemesan = $request->get('nama_pemesan');
         $email = $request->get('email');
         $phone = $request->get('phone');
@@ -47,9 +43,9 @@ class BookController extends Controller
         $time_from = $request->get('time_from');
         $time_to = $request->get('time_to');
         $jum_kamar = $request->get('jum_kamar');
-
-        return view('book.create', compact('nama_pemesan', 'email', 'phone','nama_tamu','data_id', 'time_from', 'time_to','jum_kamar'));
-    // return view('book.create');
+        
+        
+        return view('pesan.create', compact('nama_pemesan', 'email', 'phone','nama_tamu','data_id', 'time_from', 'time_to','jum_kamar'));
     }
 
     /**
@@ -85,13 +81,21 @@ class BookController extends Controller
             'jum_kamar'=>$request->jum_kamar,
 
         ]);
-
-        return redirect()->route('book.index')->with([
-            'message' => 'successfully created !',
-            'alert-type' => 'success'
-        ]);
+        return redirect()->route('laporan');
     }
 
+    public function cetakForm()
+    {
+        return view('pesan.laporan');
+    }
+
+    public function cetakLaporan($nama_pemesan ,$email)
+    {
+        $cetak = Book::with('data')->whereBetween('nama_pemesan',[$nama_pemesan, $email])->get();
+
+        return view('pesan.cetak', compact('cetak'));
+        // dd($cetak);
+    }
     /**
      * Display the specified resource.
      *
@@ -109,9 +113,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit($id)
     {
-        return view('book.edit',['book'=>$book]); 
+        //
     }
 
     /**
@@ -121,15 +125,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
-        $book->status = $request->input('status');
-
-        $book->update();
-        return redirect()->route('book.index')->with([
-            'message' => 'successfully updated !',
-            'alert-type' => 'info'
-        ]);
+        //
     }
 
     /**
@@ -138,22 +136,8 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        
-        $book->delete();
-
-        return redirect()->route('book.index')->with([
-            'message' => 'successfully deleted !',
-            'alert-type' => 'danger'
-        ]);
-    }
-
-    public function massDestroy(Request $request)
-    {
-        
-        Book::whereIn('id', request('ids'))->delete();
-
-        return response()->noContent();
+        //
     }
 }

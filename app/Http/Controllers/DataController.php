@@ -88,19 +88,6 @@ class DataController extends Controller
      */
     public function update(Request $request,$id)
     {
-        //     $validator = Validator::make($request->all(), [
-        //         'nama_kamar'=>'required|min:3',
-        //         'jum_kamar'=>'required',
-        //         'fasilitas_kamar'=>'required|min:3',
-        //         'fasilitas_umum'=>'required|min:3',
-        //     ]);
-
-        //     Data::update([
-        //     'nama_kamar'=>$request->nama_kamar,
-        //     'jum_kamar'=>$request->jum_kamar,
-        //     'fasilitas_kamar'=>$request->fasilitas_kamar,
-        //     'fasilitas_umum'=>$request->fasilitas_umum,
-        // ]);
         $data = Data::find($id);
         
         

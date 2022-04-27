@@ -21,10 +21,10 @@ class CreateBooksTable extends Migration
             $table->string('phone')->nullable();
             $table->string('nama_tamu');
             $table->foreignIdFor(Data::class)->constrained()->cascadeOnDelete();
-            $table->datetime('time_from')->nullable();
-            $table->datetime('time_to')->nullable();
+            $table->date('time_from')->nullable();
+            $table->date('time_to')->nullable();
             $table->integer('jum_kamar');
-            $table->tinyInteger('status')->nullable();
+            $table->tinyInteger('status')->default(0);
             
             $table->timestamps();
             $table->softDeletes();
