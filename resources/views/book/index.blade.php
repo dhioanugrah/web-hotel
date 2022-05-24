@@ -53,9 +53,6 @@
                     <td>{{ $booking->time_to }}</td>
                     <td>{{ $booking->status }}</td>
                     <td>
-                        <a href="{{ route('book.show', $booking->id) }}" class="btn btn-info">
-                            <i class="fa fa-eye"></i>
-                        </a>
                         <a href="{{ route('book.edit', $booking->id) }}" class="btn btn-info">
                             <i class="fa fa-edit"></i>
                         </a>

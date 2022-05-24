@@ -44,7 +44,7 @@ Route::group([
 
         
         Route::resource('book','BookController');
-        Route::delete('book_mass_destroy', [\App\Http\Controllers\BookController::class, 'massDestroy'])->name('book.mass_destroy');
+        // Route::delete('book_mass_destroy', [\App\Http\Controllers\BookController::class, 'massDestroy'])->name('book.mass_destroy');
 
 
         Route::group(['middleware'=>['can:role,"admin"']], function(){

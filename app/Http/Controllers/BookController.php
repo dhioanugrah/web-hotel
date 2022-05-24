@@ -43,7 +43,8 @@ class BookController extends Controller
         $email = $request->get('email');
         $phone = $request->get('phone');
         $nama_tamu = $request->get('nama_tamu');
-        $data_id = Data::get()->pluck('nama_kamar', 'id');
+        // $data_id = Data::get()->pluck('nama_kamar', 'id');
+        $data_id = $data;
         $time_from = $request->get('time_from');
         $time_to = $request->get('time_to');
         $jum_kamar = $request->get('jum_kamar');
@@ -132,7 +133,7 @@ class BookController extends Controller
         ]);
     }
 
-    /**
+    /**     
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -149,11 +150,11 @@ class BookController extends Controller
         ]);
     }
 
-    public function massDestroy(Request $request)
-    {
+    // public function massDestroy(Request $request)
+    // {
         
-        Book::whereIn('id', request('ids'))->delete();
+    //     Book::whereIn('id', request('ids'))->delete();
 
-        return response()->noContent();
-    }
+    //     return response()->noContent();
+    // }
 }

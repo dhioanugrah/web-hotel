@@ -79,14 +79,14 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="time_from">{{ __('Time From') }}</label>
+                        <label for="time_from">Check In</label>
                         <input type="date" class="form-control datetimepicker" id="time_from" name="time_from"
                             value="{{ old('time_from', $time_from) }}" />
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="time_to">{{ __('Time to') }}</label>
+                        <label for="time_to">Check Out</label>
                         <input type="date" class="form-control datetimepicker" id="time_to" name="time_to"
                             value="{{ old('time_to', $time_to) }}" />
                     </div>
